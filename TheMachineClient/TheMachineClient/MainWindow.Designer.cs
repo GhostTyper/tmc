@@ -33,6 +33,7 @@
             this.barManager = new DevExpress.XtraBars.BarManager(this.components);
             this.mainIcons = new DevExpress.XtraBars.Bar();
             this.mainMenu = new DevExpress.XtraBars.Bar();
+            this.testViewBarButtonItem = new DevExpress.XtraBars.BarButtonItem();
             this.statusBar = new DevExpress.XtraBars.Bar();
             this.primaryStatus = new DevExpress.XtraBars.BarStaticItem();
             this.machineStatus = new DevExpress.XtraBars.BarStaticItem();
@@ -41,7 +42,7 @@
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.documentManager = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
-            this.tabbedView2 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
+            this.tabbedView = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
             this.dockManager = new DevExpress.XtraBars.Docking.DockManager(this.components);
             this.tradesPanel = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanel1_Container = new DevExpress.XtraBars.Docking.ControlContainer();
@@ -53,7 +54,7 @@
             this.assetListImages = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tabbedView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tabbedView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager)).BeginInit();
             this.tradesPanel.SuspendLayout();
             this.assetListPanel.SuspendLayout();
@@ -74,9 +75,10 @@
             this.barManager.Form = this;
             this.barManager.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.primaryStatus,
-            this.machineStatus});
+            this.machineStatus,
+            this.testViewBarButtonItem});
             this.barManager.MainMenu = this.mainMenu;
-            this.barManager.MaxItemId = 2;
+            this.barManager.MaxItemId = 3;
             this.barManager.StatusBar = this.statusBar;
             // 
             // mainIcons
@@ -93,9 +95,18 @@
             this.mainMenu.DockCol = 0;
             this.mainMenu.DockRow = 0;
             this.mainMenu.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
+            this.mainMenu.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.testViewBarButtonItem)});
             this.mainMenu.OptionsBar.MultiLine = true;
             this.mainMenu.OptionsBar.UseWholeRow = true;
             this.mainMenu.Text = "Main menu";
+            // 
+            // testViewBarButtonItem
+            // 
+            this.testViewBarButtonItem.Caption = "Test view";
+            this.testViewBarButtonItem.Id = 2;
+            this.testViewBarButtonItem.Name = "testViewBarButtonItem";
+            this.testViewBarButtonItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.testViewBarButtonItem_ItemClick);
             // 
             // statusBar
             // 
@@ -163,12 +174,17 @@
             // 
             this.documentManager.ContainerControl = this;
             this.documentManager.MenuManager = this.barManager;
-            this.documentManager.View = this.tabbedView2;
+            this.documentManager.View = this.tabbedView;
             this.documentManager.ViewCollection.AddRange(new DevExpress.XtraBars.Docking2010.Views.BaseView[] {
-            this.tabbedView2});
+            this.tabbedView});
+            // 
+            // tabbedView
+            // 
+            this.tabbedView.QueryControl += new DevExpress.XtraBars.Docking2010.Views.QueryControlEventHandler(this.tabbedView_QueryControl);
             // 
             // dockManager
             // 
+            this.dockManager.DockingOptions.ShowCaptionImage = true;
             this.dockManager.Form = this;
             this.dockManager.RootPanels.AddRange(new DevExpress.XtraBars.Docking.DockPanel[] {
             this.tradesPanel,
@@ -243,6 +259,8 @@
             "Exchanges",
             "-"}, -1, 0, 0, 1);
             this.assetList.EndUnboundLoad();
+            this.assetList.OptionsView.ShowIndicator = false;
+            this.assetList.OptionsView.ShowRoot = false;
             this.assetList.Size = new System.Drawing.Size(246, 474);
             this.assetList.StateImageList = this.assetListImages;
             this.assetList.TabIndex = 0;
@@ -299,7 +317,7 @@
             this.Text = "The Machine Client";
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentManager)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tabbedView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tabbedView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager)).EndInit();
             this.tradesPanel.ResumeLayout(false);
             this.assetListPanel.ResumeLayout(false);
@@ -325,7 +343,7 @@
         private DevExpress.XtraBars.Docking.DockPanel tradesPanel;
         private DevExpress.XtraBars.Docking.ControlContainer dockPanel1_Container;
         private DevExpress.XtraBars.Docking2010.DocumentManager documentManager;
-        private DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView tabbedView2;
+        private DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView tabbedView;
         private DevExpress.XtraBars.Docking.DockManager dockManager;
         private DevExpress.XtraTreeList.TreeList assetList;
         private DevExpress.XtraTreeList.Columns.TreeListColumn assetListName;
@@ -333,5 +351,6 @@
         private System.Windows.Forms.ImageList assetListImages;
         private DevExpress.XtraBars.BarStaticItem primaryStatus;
         private DevExpress.XtraBars.BarStaticItem machineStatus;
+        private DevExpress.XtraBars.BarButtonItem testViewBarButtonItem;
     }
 }
